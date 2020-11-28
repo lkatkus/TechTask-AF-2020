@@ -3,9 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.jsx',
-  devtool: 'cheap-source-map',
+  devtool: 'eval-cheap-source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      '@redux': path.resolve(__dirname, 'src/redux/'),
+      '@pages': path.resolve(__dirname, 'src/pages/'),
+      '@components': path.resolve(__dirname, 'src/components/'),
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+    },
   },
   output: {
     path: path.join(__dirname, '/dist'),

@@ -1,3 +1,5 @@
+import { mapCampaignData } from '@utils';
+
 import * as types from './campaigns.types';
 
 const getCampaigns = ({ campaigns }) => (dispatch) => {
@@ -16,7 +18,7 @@ const getCampaigns = ({ campaigns }) => (dispatch) => {
 
   try {
     const payload = {
-      campaigns,
+      campaigns: mapCampaignData(campaigns),
     };
 
     dispatch({ type: types.ON_GET_CAMPAIGNS, payload });

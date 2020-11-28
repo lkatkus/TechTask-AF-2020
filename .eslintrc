@@ -1,11 +1,17 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "airbnb/hooks"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:import/recommended"],
   "rules": {
     "react/jsx-fragments": "off",
-    "comma-dangle": "off"
+    "react/prop-types": "off",
+    "comma-dangle": "off",
+    "import/prefer-default-export": "off",
+    "implicit-arrow-linebreak": "off"
   },
   "env": {
     "browser": true
+  },
+  "settings": {
+    "import/resolver": "webpack"
   }
 }
