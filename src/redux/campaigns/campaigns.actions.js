@@ -1,10 +1,11 @@
-import { usersAPI } from '@data';
+import { actions as usersActions } from '@redux/users';
 import { mapCampaignData } from '@utils';
 
 import * as types from './campaigns.types';
 
-const getCampaigns = ({ campaigns }) => async (dispatch) => {
+const getCampaigns = ({ campaigns }) => async (dispatch, getState) => {
   dispatch({ type: types.BEFORE_GET_CAMPAIGNS });
+
   if (!campaigns) {
     dispatch({
       type: types.AFTER_GET_CAMPAIGNS_ERROR,
@@ -16,24 +17,23 @@ const getCampaigns = ({ campaigns }) => async (dispatch) => {
     return;
   }
 
-  // @todo move to user store
-  const userData = await usersAPI.getUsersData();
+  await dispatch(usersActions.getUsers());
 
-  // To get some time for loading state
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 1000);
-  });
+  const { users } = getState();
 
   try {
     const payload = {
-      campaigns: mapCampaignData(campaigns, userData),
+      campaigns: mapCampaignData(campaigns, users.data),
     };
 
     dispatch({ type: types.ON_GET_CAMPAIGNS, payload });
   } catch (error) {
-    dispatch({ type: types.AFTER_GET_CAMPAIGNS_ERROR });
+    dispatch({
+      type: types.AFTER_GET_CAMPAIGNS_ERROR,
+      payload: {
+        error: 'Failed to fetch campaigns',
+      },
+    });
   }
 };
 

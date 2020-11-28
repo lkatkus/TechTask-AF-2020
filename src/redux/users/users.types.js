@@ -1,0 +1,3 @@
+export const BEFORE_GET_USERS = 'BEFORE_GET_USERS';
+export const ON_GET_USERS = 'ON_GET_USERS';
+export const AFTER_GET_USERS_ERROR = 'AFTER_GET_USERS_ERROR';
