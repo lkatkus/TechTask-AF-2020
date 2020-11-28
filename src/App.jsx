@@ -1,5 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-const App = () => <div>App</div>;
+import { actions as campaignsActions } from './redux/campaigns';
+
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.AddCampaigns = (newCampaigns) => {
+      dispatch(campaignsActions.getCampaigns({ campaigns: newCampaigns }));
+    };
+  }, [dispatch]);
+
+  return <div>App</div>;
+};
 
 export default App;
