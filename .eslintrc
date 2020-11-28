@@ -6,10 +6,12 @@
     "react/prop-types": "off",
     "comma-dangle": "off",
     "import/prefer-default-export": "off",
-    "implicit-arrow-linebreak": "off"
+    "implicit-arrow-linebreak": "off",
+    "jsx-quotes": "off"
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "settings": {
     "import/resolver": "webpack"

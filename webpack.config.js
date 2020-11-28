@@ -10,7 +10,9 @@ module.exports = {
       '@redux': path.resolve(__dirname, 'src/redux/'),
       '@pages': path.resolve(__dirname, 'src/pages/'),
       '@components': path.resolve(__dirname, 'src/components/'),
+      '@containers': path.resolve(__dirname, 'src/containers/'),
       '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@data': path.resolve(__dirname, 'src/data/'),
     },
   },
   output: {

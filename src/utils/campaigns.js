@@ -1,6 +1,9 @@
 import { isAfter, isBefore, isValid } from 'date-fns/fp';
 
-export const getCampaignsTable = (campaigns, config) => ({
+export const getCampaignsTable = (
+  campaigns,
+  config
+) => ({
   head: config,
   body: campaigns.map((campaign) => ({
     rowKey: campaign.id,
@@ -22,11 +25,17 @@ const isCampaignActive = (startDate, endDate) => {
   return isAfter(startDate)(now) && isBefore(endDate)(now);
 };
 
-export const mapCampaignData = (campaigns) =>
+const getUserData = (userId, users) => {
+  const user = users.find(({ id }) => userId === id);
+
+  return user ? user.name : 'Unknown User';
+};
+
+export const mapCampaignData = (campaigns, users) =>
   campaigns.map((campaign) => ({
     id: campaign.id,
     name: campaign.name,
-    userId: campaign.userId,
+    userId: getUserData(campaign.userId, users),
     startDate: campaign.startDate,
     endDate: campaign.endDate,
     isActive: isCampaignActive(

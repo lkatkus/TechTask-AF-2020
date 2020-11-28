@@ -1,8 +1,10 @@
+import { usersAPI } from '@data';
 import { mapCampaignData } from '@utils';
 
 import * as types from './campaigns.types';
 
-const getCampaigns = ({ campaigns }) => (dispatch) => {
+const getCampaigns = ({ campaigns }) => async (dispatch) => {
+  dispatch({ type: types.BEFORE_GET_CAMPAIGNS });
   if (!campaigns) {
     dispatch({
       type: types.AFTER_GET_CAMPAIGNS_ERROR,
@@ -14,11 +16,19 @@ const getCampaigns = ({ campaigns }) => (dispatch) => {
     return;
   }
 
-  dispatch({ type: types.BEFORE_GET_CAMPAIGNS });
+  // @todo move to user store
+  const userData = await usersAPI.getUsersData();
+
+  // To get some time for loading state
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 1000);
+  });
 
   try {
     const payload = {
-      campaigns: mapCampaignData(campaigns),
+      campaigns: mapCampaignData(campaigns, userData),
     };
 
     dispatch({ type: types.ON_GET_CAMPAIGNS, payload });
