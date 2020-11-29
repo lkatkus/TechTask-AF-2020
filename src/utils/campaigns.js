@@ -47,7 +47,7 @@ const mapDataToStore = (campaigns = [], users = []) =>
       new Date(campaign.startDate),
       new Date(campaign.endDate)
     ),
-    budget: campaign.Budget,
+    budget: { amount: campaign.Budget, currency: 'USD' },
   }));
 
 const isAfterOrEqual = (filterDate) => (date) =>
@@ -97,9 +97,29 @@ const getByName = (filter) => (campaigns) => {
   return campaigns;
 };
 
+const getInt = (modulo) => (number) => (number - (number % modulo)) / modulo;
+
+const getFormattedBudget = (number) => {
+  if (number % 1000000 !== number) {
+    const a = getInt(1000000)(number);
+    const b = getInt(100000)(number % 1000000);
+
+    return `${a}.${b}M`;
+  }
+  if (number % 1000 !== number) {
+    const a = getInt(1000)(number);
+    const b = getInt(100)(number % 1000);
+
+    return `${a}.${b}K`;
+  }
+
+  return number;
+};
+
 export default {
   getTableData,
   mapDataToStore,
   getByDate,
   getByName,
+  getFormattedBudget,
 };
