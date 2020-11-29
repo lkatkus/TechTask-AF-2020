@@ -21,18 +21,25 @@ const Main = () => {
       ) : (
         <React.Fragment>
           <CampaignsFilters
-            dateFilterHandler={(filterStart, filterEnd) => {
-              const updatedList = campaignUtils.getByDate(
-                filterStart,
-                filterEnd
-              )(campaigns);
+            filterHandler={({ startDate, endDate, name } = {}) => {
+              if (!startDate && !endDate && !name) {
+                setFilteredCampaigns(campaigns);
+              } else {
+                let updatedList = campaigns;
 
-              setFilteredCampaigns(updatedList);
-            }}
-            nameFilterHandler={(filter) => {
-              const updatedList = campaignUtils.getByName(filter)(campaigns);
+                if (startDate || endDate) {
+                  updatedList = campaignUtils.getByDate(
+                    startDate,
+                    endDate
+                  )(updatedList);
+                }
 
-              setFilteredCampaigns(updatedList);
+                if (name) {
+                  updatedList = campaignUtils.getByName(name)(updatedList);
+                }
+
+                setFilteredCampaigns(updatedList);
+              }
             }}
           />
           <CampaignsTable campaigns={filteredCampaigns} />

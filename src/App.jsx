@@ -72,8 +72,8 @@ const INITIAL_CAMPAIGNS = [
   {
     id: 9,
     name: 'Zoomcast',
-    startDate: '9/6/2017',
-    endDate: '11/10/2017',
+    startDate: '8/6/2020',
+    endDate: '12/10/2020',
     Budget: 301919,
     userId: 8,
   },
