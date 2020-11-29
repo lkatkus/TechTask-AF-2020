@@ -23,9 +23,10 @@ const CAMPAIGNS_TABLE_CONFIG = [
   },
 ];
 
-const CampaignsTable = ({ campaigns }) => (
+const CampaignsTable = ({ isLoading, campaigns }) => (
   <div>
     <Table
+      isLoading={isLoading}
       data={campaignUtils.getTableData(campaigns, CAMPAIGNS_TABLE_CONFIG)}
     />
   </div>

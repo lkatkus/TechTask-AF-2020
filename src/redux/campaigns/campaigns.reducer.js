@@ -1,6 +1,6 @@
 import * as types from './campaigns.types';
 
-export const initialState = { isLoading: false, campaigns: [] };
+export const initialState = { isLoading: false, data: [] };
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -14,12 +14,12 @@ export const reducer = (state = initialState, { type, payload }) => {
         ...state,
         error: null,
         isLoading: false,
-        campaigns: payload.campaigns,
+        data: payload.campaigns,
       };
     case types.AFTER_GET_CAMPAIGNS_ERROR:
       return {
         ...state,
-        campaigns: [],
+        data: [],
         isLoading: false,
         error: payload.error,
       };

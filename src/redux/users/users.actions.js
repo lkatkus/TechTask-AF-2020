@@ -1,15 +1,9 @@
 import { usersAPI } from '@data';
+import { toast } from 'react-toastify';
 
 import * as types from './users.types';
 
-const getUsers = () => async (dispatch, getState) => {
-  const { users } = getState();
-
-  // Prevent refetch if users were set
-  if (users.data.length > 0) {
-    return;
-  }
-
+const getUsers = () => async (dispatch) => {
   dispatch({ type: types.BEFORE_GET_USERS });
 
   // To get some time for loading state
@@ -28,6 +22,7 @@ const getUsers = () => async (dispatch, getState) => {
 
     dispatch({ type: types.ON_GET_USERS, payload });
   } catch (error) {
+    toast('Failed to fetch users data', { type: 'error' });
     dispatch({
       type: types.AFTER_GET_USERS_ERROR,
       payload: {

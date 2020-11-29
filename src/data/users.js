@@ -9,7 +9,7 @@ const getUsersData = async () => {
     const response = await axios.get(USER_API_URL);
     data = response.data;
   } catch (error) {
-    // @todo add request fail handler
+    throw new Error(error.message);
   }
 
   return data;

@@ -7,7 +7,9 @@ import { campaignUtils } from '@utils';
 
 const Main = () => {
   const [filteredCampaigns, setFilteredCampaigns] = useState([]);
-  const { isLoading, campaigns } = useSelector((state) => state.campaigns);
+  const { isLoading, data: campaigns } = useSelector(
+    (state) => state.campaigns
+  );
 
   useEffect(() => {
     if (campaigns.length > 0) {
@@ -17,35 +19,29 @@ const Main = () => {
 
   return (
     <PageWrapper>
-      {isLoading ? (
-        <div>LOADING...</div>
-      ) : (
-        <React.Fragment>
-          <CampaignsFilters
-            filterHandler={({ startDate, endDate, name } = {}) => {
-              if (!startDate && !endDate && !name) {
-                setFilteredCampaigns(campaigns);
-              } else {
-                let updatedList = campaigns;
+      <CampaignsFilters
+        filterHandler={({ startDate, endDate, name } = {}) => {
+          if (!startDate && !endDate && !name) {
+            setFilteredCampaigns(campaigns);
+          } else {
+            let updatedList = campaigns;
 
-                if (startDate || endDate) {
-                  updatedList = campaignUtils.getByDate(
-                    startDate,
-                    endDate
-                  )(updatedList);
-                }
+            if (startDate || endDate) {
+              updatedList = campaignUtils.getByDate(
+                startDate,
+                endDate
+              )(updatedList);
+            }
 
-                if (name) {
-                  updatedList = campaignUtils.getByName(name)(updatedList);
-                }
+            if (name) {
+              updatedList = campaignUtils.getByName(name)(updatedList);
+            }
 
-                setFilteredCampaigns(updatedList);
-              }
-            }}
-          />
-          <CampaignsTable campaigns={filteredCampaigns} />
-        </React.Fragment>
-      )}
+            setFilteredCampaigns(updatedList);
+          }
+        }}
+      />
+      <CampaignsTable isLoading={isLoading} campaigns={filteredCampaigns} />
     </PageWrapper>
   );
 };
