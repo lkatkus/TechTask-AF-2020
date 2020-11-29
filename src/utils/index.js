@@ -1,1 +1,1 @@
-export { getCampaignsTable, mapCampaignData } from './campaigns';
+export { default as campaignUtils } from './campaigns';

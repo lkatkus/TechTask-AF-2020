@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "airbnb/hooks", "plugin:import/recommended"],
+  "extends": ["airbnb", "airbnb/hooks", "plugin:import/recommended", "plugin:jest/recommended"],
   "rules": {
     "react/jsx-fragments": "off",
     "react/prop-types": "off",

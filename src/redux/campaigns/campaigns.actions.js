@@ -1,5 +1,5 @@
 import { actions as usersActions } from '@redux/users';
-import { mapCampaignData } from '@utils';
+import { campaignUtils } from '@utils';
 
 import * as types from './campaigns.types';
 
@@ -23,7 +23,7 @@ const getCampaigns = ({ campaigns }) => async (dispatch, getState) => {
 
   try {
     const payload = {
-      campaigns: mapCampaignData(campaigns, users.data),
+      campaigns: campaignUtils.mapDataToStore(campaigns, users.data),
     };
 
     dispatch({ type: types.ON_GET_CAMPAIGNS, payload });

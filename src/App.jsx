@@ -80,8 +80,8 @@ const INITIAL_CAMPAIGNS = [
   {
     id: 10,
     name: 'Realbridge',
-    startDate: '3/5/2020',
-    endDate: '10/2/2021',
+    startDate: '9/5/2020',
+    endDate: '5/2/2021',
     Budget: 505602,
     userId: 5,
   },
