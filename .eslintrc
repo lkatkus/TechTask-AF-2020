@@ -1,14 +1,21 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "airbnb/hooks", "plugin:import/recommended", "plugin:jest/recommended"],
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:import/recommended",
+    "plugin:jest/recommended"
+  ],
   "rules": {
     "react/jsx-fragments": "off",
     "react/prop-types": "off",
     "react/jsx-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
     "comma-dangle": "off",
     "import/prefer-default-export": "off",
     "implicit-arrow-linebreak": "off",
-    "jsx-quotes": "off"
+    "jsx-quotes": "off",
+    "object-curly-newline": "off"
   },
   "env": {
     "browser": true,

@@ -19,6 +19,15 @@ const getTableData = (campaigns, config) => ({
   })),
 });
 
+const isAfterOrEqual = (filterDate) => (date) =>
+  isAfter(filterDate)(date) || isEqual(filterDate)(date);
+
+const isBeforeOrEqual = (filterDate) => (date) =>
+  isBefore(filterDate)(date) || isEqual(filterDate)(date);
+
+const isInRange = (filterStart, filterEnd) => (startDate, endDate) =>
+  isAfterOrEqual(filterStart)(startDate) && isBeforeOrEqual(filterEnd)(endDate);
+
 const isCampaignActive = (startDate, endDate) => {
   if (!isValid(startDate) || !isValid(endDate)) {
     return false;
@@ -26,7 +35,7 @@ const isCampaignActive = (startDate, endDate) => {
 
   const now = new Date();
 
-  return isAfter(startDate)(now) && isBefore(endDate)(now);
+  return isAfterOrEqual(startDate)(now) && isBeforeOrEqual(endDate)(now);
 };
 
 const getUserData = (userId, users) => {
@@ -49,15 +58,6 @@ const mapDataToStore = (campaigns = [], users = []) =>
     ),
     budget: { amount: campaign.Budget, currency: 'USD' },
   }));
-
-const isAfterOrEqual = (filterDate) => (date) =>
-  isAfter(filterDate)(date) || isEqual(filterDate)(date);
-
-const isBeforeOrEqual = (filterDate) => (date) =>
-  isBefore(filterDate)(date) || isEqual(filterDate)(date);
-
-const isInRange = (filterStart, filterEnd) => (startDate, endDate) =>
-  isAfterOrEqual(filterStart)(startDate) && isBeforeOrEqual(filterEnd)(endDate);
 
 const getByDate = (filterStart, filterEnd) => (campaigns) => {
   const filterStartDate = startOfDay(new Date(filterStart));

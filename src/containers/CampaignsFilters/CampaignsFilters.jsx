@@ -1,21 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { equals } from 'ramda';
-import styled from 'styled-components';
 
-const FiltersContainer = styled('div')`
-  margin-bottom: 20px;
-`;
+import { Button, Input } from '@components';
 
-const FiltersInputContainer = styled('div')`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-`;
-
-const SummaryContainer = styled('div')`
-  display: flex;
-  justify-content: space-between;
-`;
+import {
+  FiltersContainer,
+  FiltersInputContainer,
+  FiltersSummary,
+} from './components';
 
 const CampaignsFilters = ({ filterHandler }) => {
   const nameFilterRef = useRef();
@@ -36,7 +28,7 @@ const CampaignsFilters = ({ filterHandler }) => {
     <FiltersContainer>
       <FiltersInputContainer>
         <div>
-          <input
+          <Input
             ref={startFilterRef}
             type='date'
             id='startDate'
@@ -50,7 +42,7 @@ const CampaignsFilters = ({ filterHandler }) => {
               }))
             }
           />
-          <input
+          <Input
             ref={endFilterRef}
             type='date'
             id='endDate'
@@ -66,14 +58,14 @@ const CampaignsFilters = ({ filterHandler }) => {
           />
         </div>
         <div>
-          <input
+          <Input
             ref={nameFilterRef}
             type='text'
             id='searchName'
             name='searchName'
             placeholder='Search by name'
           />
-          <button
+          <Button
             type='button'
             onClick={() => {
               setFilter((currentFilter) => ({
@@ -83,13 +75,25 @@ const CampaignsFilters = ({ filterHandler }) => {
             }}
           >
             Search
-          </button>
+          </Button>
         </div>
       </FiltersInputContainer>
 
-      <SummaryContainer>
-        <div>{JSON.stringify(activeFilter)}</div>
-        <button
+      <FiltersSummary>
+        <div>
+          {activeFilter && (
+            <React.Fragment>
+              {activeFilter.name && <div>Name - {activeFilter.name}</div>}
+              {activeFilter.startDate && (
+                <div>Start date - {activeFilter.startDate}</div>
+              )}
+              {activeFilter.endDate && (
+                <div>End date - {activeFilter.endDate}</div>
+              )}
+            </React.Fragment>
+          )}
+        </div>
+        <Button
           type='button'
           onClick={() => {
             nameFilterRef.current.value = null;
@@ -100,8 +104,8 @@ const CampaignsFilters = ({ filterHandler }) => {
           }}
         >
           Clear filters
-        </button>
-      </SummaryContainer>
+        </Button>
+      </FiltersSummary>
     </FiltersContainer>
   );
 };

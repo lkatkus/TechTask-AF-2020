@@ -18,7 +18,6 @@ const CAMPAIGNS_TABLE_CONFIG = [
   {
     label: 'Budget',
     key: 'budget',
-    // @todo add currency format
     component: (value) =>
       `${campaignUtils.getFormattedBudget(value.amount)} ${value.currency}`,
   },

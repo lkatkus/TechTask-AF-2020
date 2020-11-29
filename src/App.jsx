@@ -16,16 +16,16 @@ const INITIAL_CAMPAIGNS = [
   {
     id: 2,
     name: 'Jaxspan',
-    startDate: '11/21/2017',
-    endDate: '2/21/2018',
+    startDate: '11/21/2019',
+    endDate: '2/21/2020',
     Budget: 608715,
     userId: 6,
   },
   {
     id: 3,
     name: 'Miboo',
-    startDate: '11/1/2017',
-    endDate: '6/20/2017',
+    startDate: '11/1/2020',
+    endDate: '6/20/2021',
     Budget: 239507,
     userId: 7,
   },
@@ -33,85 +33,36 @@ const INITIAL_CAMPAIGNS = [
     id: 4,
     name: 'Trilith',
     startDate: '8/25/2017',
-    endDate: '11/30/2017',
+    endDate: '11/30/2022',
     Budget: 179838,
     userId: 1,
   },
   {
     id: 5,
     name: 'Layo',
-    startDate: '11/28/2017',
-    endDate: '3/10/2018',
+    startDate: '11/28/2025',
+    endDate: '3/10/2030',
     Budget: 837850,
     userId: 9,
-  },
-  {
-    id: 6,
-    name: 'Photojam',
-    startDate: '7/25/2017',
-    endDate: '6/23/2017',
-    Budget: 858131,
-    userId: 3,
-  },
-  {
-    id: 7,
-    name: 'Blogtag',
-    startDate: '6/27/2017',
-    endDate: '1/15/2018',
-    Budget: 109078,
-    userId: 2,
-  },
-  {
-    id: 8,
-    name: 'Rhyzio',
-    startDate: '10/13/2017',
-    endDate: '1/25/2018',
-    Budget: 272552,
-    userId: 4,
-  },
-  {
-    id: 9,
-    name: 'Zoomcast',
-    startDate: '8/6/2020',
-    endDate: '12/10/2020',
-    Budget: 301919,
-    userId: 8,
-  },
-  {
-    id: 10,
-    name: 'Realbridge',
-    startDate: '9/5/2020',
-    endDate: '5/2/2021',
-    Budget: 5056020,
-    userId: 5,
-  },
-  {
-    id: 10,
-    name: 'Realbridge',
-    startDate: '9/5/2020',
-    endDate: '5/2/2021',
-    Budget: 6356020,
-    userId: 5,
   },
 ];
 
 const App = () => {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    // eslint-disable-next-line
+    console.log('Available methods:', 'AddCampaigns', 'GetSomeCampaigns');
+  }, []);
+
   // Adds global AddCampaigns
   useEffect(() => {
     window.AddCampaigns = (newCampaigns) => {
       dispatch(campaignsActions.getCampaigns({ campaigns: newCampaigns }));
     };
-  }, [dispatch]);
-
-  // @todo remove, when done with testing
-  useEffect(() => {
-    dispatch(
-      campaignsActions.getCampaigns({
-        campaigns: INITIAL_CAMPAIGNS,
-      })
-    );
+    window.GetSomeCampaigns = () => {
+      dispatch(campaignsActions.getCampaigns({ campaigns: INITIAL_CAMPAIGNS }));
+    };
   }, [dispatch]);
 
   return <Main />;
