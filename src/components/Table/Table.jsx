@@ -1,27 +1,33 @@
 import React from 'react';
 
+import { TableContainer, TableCell } from './components';
+
 const Table = ({ data }) => {
   // @todo add checks if data exists / is valid
   const headData = data.head;
   const bodyData = data.body;
 
   return (
-    <table>
+    <TableContainer>
       <thead>
         {headData.map(({ label, key }) => (
-          <td key={key}>{label}</td>
+          <TableCell isHeaderCell key={key}>
+            {label}
+          </TableCell>
         ))}
       </thead>
       <tbody>
         {bodyData.map(({ rowKey, rowData }) => (
           <tr key={rowKey}>
             {rowData.map(({ colKey, colData, component }) => (
-              <td key={colKey}>{component ? component(colData) : colData}</td>
+              <TableCell key={colKey}>
+                {component ? component(colData) : colData}
+              </TableCell>
             ))}
           </tr>
         ))}
       </tbody>
-    </table>
+    </TableContainer>
   );
 };
 

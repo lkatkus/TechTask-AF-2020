@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { CampaignsFilters, CampaignsTable } from '@containers';
+import { PageWrapper } from '@components';
 import { campaignUtils } from '@utils';
 
 const Main = () => {
@@ -15,7 +16,7 @@ const Main = () => {
   }, [campaigns]);
 
   return (
-    <div>
+    <PageWrapper>
       {isLoading ? (
         <div>LOADING...</div>
       ) : (
@@ -45,7 +46,7 @@ const Main = () => {
           <CampaignsTable campaigns={filteredCampaigns} />
         </React.Fragment>
       )}
-    </div>
+    </PageWrapper>
   );
 };
 

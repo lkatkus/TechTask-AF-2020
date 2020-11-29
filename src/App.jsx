@@ -106,11 +106,7 @@ const App = () => {
     );
   }, [dispatch]);
 
-  return (
-    <div>
-      <Main />
-    </div>
-  );
+  return <Main />;
 };
 
 export default App;

@@ -3,6 +3,8 @@ import React from 'react';
 import { Table } from '@components';
 import { campaignUtils } from '@utils';
 
+import { ActivityIndicator } from './components';
+
 const CAMPAIGNS_TABLE_CONFIG = [
   { label: 'Name', key: 'name' },
   { label: 'User Name', key: 'userName' },
@@ -11,8 +13,7 @@ const CAMPAIGNS_TABLE_CONFIG = [
   {
     label: 'Active',
     key: 'isActive',
-    // @todo add activity indicator
-    component: (value) => (value ? 'Active' : 'Inactive'),
+    component: (value) => <ActivityIndicator isActive={value} />,
   },
   {
     label: 'Budget',

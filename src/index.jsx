@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProductio
 
 import App from './App';
 import { rootReducer, initialRootState } from './redux';
+import { GlobalStyle } from './theme';
 
 const store = createStore(
   rootReducer,
@@ -19,6 +20,7 @@ const store = createStore(
 
 const ComposedApp = () => (
   <Provider store={store}>
+    <GlobalStyle />
     <App />
   </Provider>
 );
